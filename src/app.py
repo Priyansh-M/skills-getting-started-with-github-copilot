@@ -39,6 +39,18 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     },
+    "Basketball Club": {
+        "description": "Practice basketball skills and compete in school games",
+        "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": []
+    },
+    "Volleyball Club": {
+        "description": "Learn volleyball techniques and play team matches",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": []
+    },
     "Soccer Club": {
         "description": "Practice soccer skills and compete in school matches",
         "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
@@ -57,6 +69,18 @@ activities = {
         "max_participants": 18,
         "participants": []
     },
+    "Music Club": {
+        "description": "Develop musical skills through singing and instrumental performance",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": []
+    },
+    "Photography Club": {
+        "description": "Learn photography techniques and tell stories through images",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": []
+    },
     "Drama Club": {
         "description": "Develop acting skills and perform plays for the school community",
         "schedule": "Thursdays, 3:30 PM - 5:30 PM",
@@ -73,6 +97,18 @@ activities = {
         "description": "Conduct experiments and explore scientific ideas",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 18,
+        "participants": []
+    },
+    "Robotics Club": {
+        "description": "Design, build, and program robots to solve creative challenges",
+        "schedule": "Mondays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": []
+    },
+    "Math Club": {
+        "description": "Explore challenging problems and prepare for mathematics competitions",
+        "schedule": "Thursdays, 3:30 PM - 4:30 PM",
+        "max_participants": 16,
         "participants": []
     }
 }
@@ -101,6 +137,9 @@ def signup_for_activity(activity_name: str, email: str):
     # Validate student is not already signed up
     if email in activity["participants"]:
         raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+    # Validate student is not already signed up
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Activity is full")
 
     # Add student
     activity["participants"].append(email)
